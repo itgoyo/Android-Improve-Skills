@@ -2,7 +2,7 @@
 
 ## 高级UI
 
-### Recyclerview
+### 1、Recyclerview
 
 - 配置Gradle
 
@@ -10,7 +10,7 @@
 compile ‘com.android.support:recyclerview-v7:23.2.1’
 ```
 
-#### MateriaDesign控制全局样式
+#### 1.1 MateriaDesign控制全局样式
 
 ```
 <!--
@@ -53,7 +53,7 @@ compile ‘com.android.support:recyclerview-v7:23.2.1’
 
   - 沉浸式（QQ）
 
-#### MaterialDesign兼容性控件的使用
+#### 1.2 MaterialDesign兼容性控件的使用
 
 在appcompat-V7里面有很多为兼容而生的控件，这样就可以做到高低版本和不同的ROM之间体验一致！还可以配合appcompat的主题使用达到体验一致性
 
@@ -82,7 +82,7 @@ style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:orientation="vertical" >
 ```
 
-#### V7 RecyclerView
+#### 1.3 V7 RecyclerView
 
 特点：
 
@@ -114,3 +114,34 @@ adapter = new MyStaggedRecyclerAdapter(list);
 recylerview.setLayoutManager(new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL));
 recylerview.setAdapter(adapter);
 ```
+
+**个人开发使用出现的问题：**
+
+今天把项目中的ListView换成最近比较流行的RecycleView发现，之前好好的item，改用了RecycleView之后就变得参差不齐了，解决方法
+
+stackoverflow给的答案是：
+
+如果之前使用的是 view.inflate，要换成LayoutInflater
+
+在onCreateViewHolder方法中把
+
+View view = View.inflate(mContext, R.layout.xlistview_course_item, null)
+
+换成
+
+View view = mInflater.from(mContext).inflate(R.layout.xlistview_course_item, parent, false)即可。
+
+#### 2、MaterialDesign_LayoutInflater源码分析
+
+TODO：
+
+#### 3、RecyclerView设置分割线
+
+- RecyclerView没有默认的分割线，需要自己绘制。
+    - RecyclerView.ItemDecoration
+
+       线性的分割线
+
+	     网格的分割线
+
+-
